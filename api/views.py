@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User, Group
+# from django.contrib.auth.models import User, Group
+from api.models import User,Group
 from rest_framework import viewsets
 from api.serializers import UserSerializer, GroupSerializer
 

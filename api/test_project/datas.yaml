@@ -1,0 +1,17 @@
+api_user:
+  - id: 1
+    username: zuorn
+    email: zuorn@qq.com
+    groups: http://127.0.0.1/groups/1/
+
+  - id: 2
+    username: zuorn01
+    email: zuorn01@qq.com
+    groups: http://127.0.0.1/groups/2/
+
+
+api_group:
+  - id: 1
+    name: Developer
+  - id: 2
+    name: Tester
