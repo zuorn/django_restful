@@ -1,6 +1,6 @@
 import requests
 import unittest
-from api.test_project.mysql_action import DB
+from mysql_action import DB
 import yaml
 
 
