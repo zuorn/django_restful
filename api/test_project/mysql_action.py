@@ -4,13 +4,13 @@ import yaml
 
 class DB():
     def __init__(self):
-        '''连接数据库'''
+        """ 连接数据库 """
         print('connect db')
-        self.conn=connect(host='127.0.0.1',user='root',
-                          password='123456',db='django_restful')
+        self.conn = connect(host='127.0.0.1', user='root',
+                            password='123456', db='django_restful')
 
-    def clear(self,table_name):
-        '''清除表中数据'''
+    def clear(self, table_name):
+        """清除表中数据"""
         print('clear db...')
         clear_sql = 'truncate' + table_name + ';'
         with self.conn.cursor() as cursor:
@@ -20,7 +20,7 @@ class DB():
         self.conn.commit()
 
     def insert(self, table_name, table_data):
-        '''插入数据'''
+        """插入数据"""
         print('insert db....')
 
         # 遍历数据
@@ -36,18 +36,17 @@ class DB():
         insert_sql = "insert into" + table_name + "(" + key + ")" + "values" + "(" + value + ")"
         print(insert_sql)
 
-
         with self.conn.cursor() as cursor:
             cursor.execute(insert_sql)
         self.conn.commit()
 
     def close(self):
-        '''关闭数据库连接'''
+        """关闭数据库连接"""
         print('close db')
         self.conn.close()
 
     def init_data(self, datas):
-        '''初始化数据'''
+        """初始化数据"""
         print('init db ...')
         for table, data in datas.items():
             self.clear(table)
@@ -55,19 +54,19 @@ class DB():
                 self.init_data(table, d)
         self.close()
 
+
 if __name__ == '__main__':
     db = DB()
     # 调试各个方法
     db.clear('api_user')
     db.clear('api_group')
-    user_data={'id':1,'username':'zuorn','email':'zuorn@qq.com'}
-    db.insert('api_user',user_data)
-    group_data={'id':1,'name':'Developer'}
-    db.insert('api_group',group_data)
+    user_data = {'id': 1, 'username': 'zuorn', 'email': 'zuorn@qq.com'}
+    db.insert('api_user', user_data)
+    group_data = {'id': 1, 'name': 'Developer'}
+    db.insert('api_group', group_data)
     db.close()
 
-
     # 初始化数据
-    f = open('datas.yaml','r')
-    datas=yaml.load(f)
+    f = open('datas.yaml', 'r')
+    datas = yaml.load(f)
     db.init_data(datas)
